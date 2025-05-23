@@ -7,10 +7,12 @@ const accountsRoute = require('./routes/accounts');
 
 const app = express();
 
-app.use(cors({
-  origin: '*', // Or be specific: 'https://your-frontend.vercel.app'
-}));
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+};
 
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use('/accounts', accountsRoute);
